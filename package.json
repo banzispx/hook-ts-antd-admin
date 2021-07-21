@@ -44,6 +44,16 @@
   "devDependencies": {
     "@craco/craco": "^6.2.0",
     "craco-less": "^1.18.0",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.0.1",
     "prettier": "2.3.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,css,md,ts,tsx}": "prettier --write"
   }
 }
