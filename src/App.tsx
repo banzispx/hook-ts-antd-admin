@@ -1,16 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
+import Login from './pages/login';
 import './App.css';
-
+import { FullPageErrorFallback, FullPageLoading } from './compoments/main';
+import ErrorBoundary from './compoments/error-boundary';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </header>
+      {/* 错误边界 */}
+      <ErrorBoundary fallbackRender={FullPageErrorFallback}>
+        {/* 显示FullPageLoading 直到他的子组件加载完成 */}
+        <React.Suspense fallback={<FullPageLoading />}>
+          {/* {user ? <AuthenticatedApp /> : <UnauthenticatedApp />} */}
+          <Login></Login>
+        </React.Suspense>
+      </ErrorBoundary>
     </div>
   );
 }

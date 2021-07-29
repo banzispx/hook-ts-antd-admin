@@ -19,7 +19,7 @@ git hook ==>使用 git 钩子，在 commit 前校验代码，并格式化代码
   }
 ```
 
-commitLint 常用 type 类型
+[commitLint](https://github.com/conventional-changelog/commitlint) 常用 type 类型
 
 ```
 build	编译相关的修改，例如发布版本、对项目构建或者依赖的改动
