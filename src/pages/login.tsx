@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Card, Form, Input } from 'antd';
 import styled from '@emotion/styled';
+import { useHistory } from 'react-router-dom';
+import { useAuth } from 'hooks/useAuth';
 
 const LongButton = styled(Button)`
   width: 50%;
@@ -30,9 +32,18 @@ const Container = styled.div`
 `;
 function Login() {
   const [isLoading, setIsLoading] = useState(false);
+  const { user, login } = useAuth();
+  const history = useHistory();
+  useEffect(() => {
+    if (user?.token) {
+      history.replace({ pathname: '/' });
+      return;
+    }
+  }, [history, user]);
   const handleSubmit = (values: { username: string; password: string }) => {
     setIsLoading(true);
     setTimeout(() => {
+      login(values);
       setIsLoading(false);
     }, 2000);
   };

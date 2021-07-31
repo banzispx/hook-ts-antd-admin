@@ -5,9 +5,12 @@ import reportWebVitals from './reportWebVitals';
 import 'antd/dist/antd.less';
 // import 'antd/dist/antd.dark.css'; // 引入官方提供的暗色 less 样式入口文件
 // import 'antd/dist/antd.compact.css'; // 引入官方提供的紧凑 less 样式入口文件
+import { AuthProvider } from './context';
 ReactDOM.render(
   // <React.StrictMode>
-  <App />,
+  <AuthProvider>
+    <App />
+  </AuthProvider>,
   // </React.StrictMode>,
   document.getElementById('root')
 );

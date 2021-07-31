@@ -1,7 +1,15 @@
+/* 参考文档 rem布局 https://www.cnblogs.com/colorsed/p/7373346.html */
 html {
   font-size: 62.5%;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
-/* 参考文档 rem布局 https://www.cnblogs.com/colorsed/p/7373346.html */
 html body #root .App {
   min-height: 100vh;
+}
+.fr {
+  float: right;
 }
