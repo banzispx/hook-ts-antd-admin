@@ -74,7 +74,7 @@ const useAsync = <D>(
   );
 
   const run = useCallback(
-    (promise: Promise<D>, runConfig: { retry?: () => Promise<D> } = {}) => {
+    (promise: Promise<any>, runConfig: { retry?: () => Promise<D> } = {}) => {
       if (!(promise instanceof Promise)) {
         throw new Error('请传入 Promise 类型数据');
       }

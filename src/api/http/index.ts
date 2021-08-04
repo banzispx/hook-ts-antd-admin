@@ -6,8 +6,8 @@ interface HttpType {
 }
 interface ParamsType {
   payload?: any;
-  $token: true;
-  $blob: false;
+  $token?: true;
+  $blob?: false;
 }
 // 如需拓展，将要拓展的方法添加至数组中
 const HTTP_OPTIONS = ['get', 'post', 'put', 'delete'];
@@ -34,6 +34,7 @@ HTTP_OPTIONS.forEach((item) => {
         method: item.toUpperCase() as AxiosRequestConfig['method'],
         url,
         data: payload || params,
+        params: item === 'get' ? payload || params : null,
         headers,
         responseType, // https://www.cnblogs.com/wynblogscc/p/14807532.html
       })

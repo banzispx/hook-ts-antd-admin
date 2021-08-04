@@ -39,7 +39,7 @@ export const AuthenticatedApp = () => {
       <PageHeader />
       <Layout className={'content'}>
         <PageSider />
-        <Content style={{ margin: '2rem', backgroundColor: '#e4e8ea' }}>
+        <Content style={{ margin: '2rem' }}>
           {/* 在此添加懒加载时展示的内容 */}
           <React.Suspense fallback={<FullPageLoading />}>
             <Switch>

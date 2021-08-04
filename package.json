@@ -25,7 +25,8 @@
     "serve": "craco  start",
     "build": "craco  build",
     "test": "craco  test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "jsonserve": "json-server __json_server_mock__/db.json --watch --port 3001"
   },
   "eslintConfig": {
     "extends": [
@@ -53,6 +54,7 @@
     "@emotion/styled": "^11.3.0",
     "craco-less": "^1.18.0",
     "husky": "^7.0.1",
+    "json-server": "^0.16.3",
     "lint-staged": "^11.0.1",
     "prettier": "2.3.2"
   },
@@ -67,5 +69,6 @@
   },
   "_moduleAliases": {
     "@/*": "src/*"
-  }
+  },
+  "proxy": "http://localhost:3001"
 }

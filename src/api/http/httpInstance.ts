@@ -1,17 +1,16 @@
-import { message } from 'antd';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { message } from 'antd';
 const http = axios.create({
   timeout: 5000,
   withCredentials: true,
   headers: { 'X-Requested-With': 'XMLHttpRequest' },
 });
-interface ResponseType {
+export interface ResponseType {
   code: string;
   data: object;
   msg?: string;
 }
-const history = useHistory();
+// const history = useHistory(); // 在js文件中无法使用hook路由跳转的方法，可以通过清除登录信息来实现路由跳转
 // 响应拦截器
 http.interceptors.response.use(
   function (response): any {
@@ -31,22 +30,23 @@ http.interceptors.response.use(
     const dealDate: ResponseType = {
       code: response.data.code,
       msg: response.data.msg,
-      data: response.data.data,
+      data: response.data,
     };
     // 对错误进行统一处理
-    if (response.data.code !== 1) {
-      if (response.data.msg) {
-        message.error(response.data.msg);
-      }
-      // code不为1， rejcet，在catch中收集信息，发送操作日志
-      return Promise.reject(dealDate);
-    }
+    // 下面的逻辑代码暂时有问题，需要隐掉
+    // if (response.data.code !== 1) {
+    //   if (response.data.msg) {
+    //     message.error(response.data.msg);
+    //   }
+    //   // code不为1， rejcet，在catch中收集信息，发送操作日志
+    //   return Promise.reject(dealDate);
+    // }
     // code为1， resolve， try await成功，try中收集信息，发送操作日志
     return Promise.resolve(dealDate);
   },
   function (error) {
     const code = error.message.split('code')[1]?.trim() || '';
-    const message = error.response.data.message;
+    const msg = error.response.data.message;
     // http异常返回在这里处理
     // 400报错
     if (+code === 400) {
@@ -55,12 +55,12 @@ http.interceptors.response.use(
     // token失效
     if (+code === 401) {
       sessionStorage.clear();
-      history.replace('/login');
+      // history.replace('/login');
     }
     // 无权限
     if (+code === 403) {
-      message.error(message);
-      history.push('/error/403');
+      message.error(msg);
+      // history.push('/error/403');
     }
     if (+code === 500) {
       message.error('服务异常');
